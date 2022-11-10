@@ -3,20 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdo-carm <mdo-carm@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thorum <thorum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 15:24:10 by mdo-carm          #+#    #+#             */
-/*   Updated: 2022/11/10 05:44:39 by mdo-carm         ###   ########.fr       */
+/*   Updated: 2022/11/10 17:48:42 by thorum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <unistd.h>
 #include <signal.h>
+#include <stdlib.h>
 
-char	x[8];
+char x[8];
 
-void abtoa ()
+void abtoa (const char *x)
 {
 	int		binary[8] = {128,64,32,16,8,4,2,1};
 	int		charvalue;
@@ -24,7 +25,8 @@ void abtoa ()
 	char	y;
 
 	i = 0;
-	while (i <= 0)
+	charvalue = 0;
+	while (i < 8)
 	{
 		if (x[i] == '1')
 		{
@@ -40,13 +42,13 @@ void abtoa ()
 	// write(2, &y, 1);
 }
 
-void usr1handler(int num)
+void handler(int num)
 {
-	int		i;
-	
-	i = 0;
-	if (i < 8)
+	static int	i;
+
+	while (i < 8)
 	{
+		printf("%d\n", x);
 		if (num == 10)
 			x[i] = 48; // number 2 in the ascii table
 		if (num == 12)
@@ -54,20 +56,15 @@ void usr1handler(int num)
 		i++;
 	}
 	x[8] = '\0';
-	abtoa();
-}
-
-void usr2handler(int num)
-{
-	usr1handler(num);
+	// printf("%s\n", x);
+	// abtoa(x);
 }
 
 int	main()
-{
+{	
 	printf("PID: %d\n", getpid()); // Change to ft_printf
-	signal(SIGUSR1, usr1handler);
-	signal(SIGUSR2, usr2handler);
-	printf("%s\n", x);
+	signal(SIGUSR1, handler);
+	signal(SIGUSR2, handler);
 	while (1)
 		sleep(1);
 }
