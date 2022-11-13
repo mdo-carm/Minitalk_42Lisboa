@@ -1,41 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   minitalk.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdo-carm <mdo-carm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/07 15:23:35 by mdo-carm          #+#    #+#             */
-/*   Updated: 2022/11/13 17:57:45 by mdo-carm         ###   ########.fr       */
+/*   Created: 2022/11/13 15:21:47 by mdo-carm          #+#    #+#             */
+/*   Updated: 2022/11/13 15:28:28 by mdo-carm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#ifndef MINITALK_H
+# define MINITALK_H
 
-int	main(int argc, char **argv)
-{
-	int		bit;
-	int		x;
-	int		i;
+#include <unistd.h>
+#include <signal.h>
+#include "Libft/libft.h"
+#include "ft_printf/ft_printf.h"
 
-	if (argc != 3)
-		return (write(2, "ERROR: Not Enough Arguments\n", 28));
-	x = ft_atoi(argv[1]);
-	i = 0;
-	bit = 0;
-	while (argv[2][i])
-	{
-		while (bit < 8)
-		{
-			if (argv[2][i] & 128 >> bit)
-				kill(x, 12);
-			else
-				kill(x, 10);
-			bit++;
-			usleep(100);
-		}
-		bit = 0;
-		i++;
-	}
-	return (0);
-}
+#endif

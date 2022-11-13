@@ -6,25 +6,23 @@
 /*   By: mdo-carm <mdo-carm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 15:24:10 by mdo-carm          #+#    #+#             */
-/*   Updated: 2022/11/12 01:26:03 by mdo-carm         ###   ########.fr       */
+/*   Updated: 2022/11/13 15:22:55 by mdo-carm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <signal.h>
-#include <stdlib.h>
+#include "minitalk.h"
 
-void abtoa (int num)
+int	g_binary[8] = {128, 64, 32, 16, 8, 4, 2, 1};
+
+void	abtoa(int num)
 {
-	int				binary[8] = {128,64,32,16,8,4,2,1};
 	static int		charvalue;
 	static int		i;
 
 	if (i < 8)
 	{
 		if (num == 12)
-			charvalue = charvalue + binary[i];
+			charvalue = charvalue + g_binary[i];
 		i++;
 	}
 	if (i == 8)
@@ -35,11 +33,12 @@ void abtoa (int num)
 	}
 }
 
-int	main()
+int	main(void)
 {
-	printf("PID: %d\n", getpid()); // Change to ft_printf
+	ft_printf("PID: %d\n", getpid());
 	signal(SIGUSR1, abtoa);
 	signal(SIGUSR2, abtoa);
 	while (1)
 		sleep(1);
+	return (0);
 }
