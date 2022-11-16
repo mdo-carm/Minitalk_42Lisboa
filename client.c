@@ -6,7 +6,7 @@
 /*   By: mdo-carm <mdo-carm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 15:23:35 by mdo-carm          #+#    #+#             */
-/*   Updated: 2022/11/13 18:49:38 by mdo-carm         ###   ########.fr       */
+/*   Updated: 2022/11/16 17:37:12 by mdo-carm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int argc, char **argv)
 	int		i;
 
 	if (argc != 3)
-		return (write(2, "ERROR: Not Enough Arguments\n", 28));
+		return (write(2, "Incorrect amount of arguments\n", 30));
 	x = ft_atoi(argv[1]);
 	i = 0;
 	bit = 0;
